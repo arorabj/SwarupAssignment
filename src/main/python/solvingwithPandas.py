@@ -1,23 +1,20 @@
 import pandas as pd
 import numpy as np
-import configparser as cp
+from src.main.python.dbConnection import *
 
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 pd.set_option('display.width', 2000)
 pd.set_option('display.max_colwidth', None)
 
-confPath = '../../../resources/config/application.properties'
-fileName="../../../resources/inbound/US_COVID_SHORT_SAMPLE_DataChallenge.csv"
-env = "dev"
-#get variables from config File
-props = cp.RawConfigParser()
-props.read(confPath)
 
-executionMode = props.get(env,'executionMode')
-mode = props.get(env,'dataWriteMode')
-url_connect = props.get(env,'urlConnect')
-properties = props.get(env,'connProperties')
+fileName="../../../resources/inbound/US_COVID_SHORT_SAMPLE_DataChallenge.csv"
+
+#get variables from config File
+
+
+executionMode = read_config('executionMode')
+
 
 table = "Covid_Data_Analysis"
 
@@ -47,5 +44,5 @@ conditions_values = ['HIGH','MEDIUM','LOW']
 dfModified['covid_case_rate'] = np.select(conditions_covid_case_rate, conditions_values)
 dfModified['covid_death_rate'] = np.select(conditions_covid_death_rate, conditions_values)
 
-dfModified.to_sql(table)
+# dfModified.to_sql(table)
 

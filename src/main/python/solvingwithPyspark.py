@@ -1,18 +1,15 @@
 import pyspark
 from pyspark.sql import SparkSession
-import configparser as cp
+from src.main.python.dbConnection import *
 
-confPath = '../../../resources/config/application.properties'
+
 fileName="../../../resources/inbound/US_COVID_SHORT_SAMPLE_DataChallenge.csv"
-env = "dev"
-#get variables from config File
-props = cp.RawConfigParser()
-props.read(confPath)
 
-executionMode = props.get(env,'executionMode')
-mode = props.get(env,'dataWriteMode')
-url_connect = props.get(env,'urlConnect')
-properties = props.get(env,'connProperties')
+
+executionMode = read_config('executionMode')
+mode = read_config('dataWriteMode')
+url_connect = read_config('urlConnect')
+properties = read_config('connProperties')
 
 table = "Covid_Data_Analysis"
 
