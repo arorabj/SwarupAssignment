@@ -37,7 +37,7 @@ modifiedDF = spark.sql(""" select
 print ("Count after loading new columns :" + str(dfRaw.count()))
 
 print (modifiedDF.show(1000))
-#modifiedDF.write.option('driver', 'org.postgresql.Driver').jdbc(url_connect, table, mode, properties)
+modifiedDF.write.option('driver', 'org.postgresql.Driver').jdbc(url_connect, table, mode, properties)
 
 
 
