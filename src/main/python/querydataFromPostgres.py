@@ -59,3 +59,4 @@ except p.Error as e:
     print(e)
 
 
+db_connection_close(conn_type,conn,curr)
